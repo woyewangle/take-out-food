@@ -1,0 +1,24 @@
+1.格式化数据为商品的id和数量(formatInputs)
+    in:Inputs[String]
+    out:itemsTypeAndNum[{id:String,num:number}...]
+2.映射商品的信息并且小计(fIndItemDetail)
+    in:itemsTypeAndNum,allItems[{id: String, name: String, price: number}...]
+    out:itemsdetail[{id: String, name: String, price: number,num:number,subtotal: number}...]
+3.初始化，先计算没有优惠的情况的总价格（calculateCartSum）
+    in:itemsdetail
+    out：bestPromotion：[{type:"",save:"",sum:number}];
+3.判断商品列表能不能达到使用优惠的条件（isDiscount）
+    in:itemsdetail,promotions{type: String, items: [String, String]}
+    out:true of false
+4.计算半价优惠，计算节省和总价格(countDiscoutforHalfReduce)
+    in:itemsdetail,promotions{type: String, items: [String, String]}
+    out:discountContent=[{type:String,save:number,sum:number}];
+5.计算满30-6优惠(countDiscoutforFullReduce)
+    in:itemsdetail
+    out:discountContent=[{type:String,save:number,sum:number}];
+6.查找最佳优惠方式(selectBestPromotion)
+    in：discountContent1,discountContent2
+    out:receiptToPrint
+7.生成账单(buildBill)
+    in:，itemsdetail，bestPromotion[{type:String,save:number,sum:number}];
+    out:bill:String
